@@ -14,12 +14,15 @@ class BleRx : public IRx{
     private:
         UART_HandleTypeDef *huart;
         osMessageQueueId_t *qhandle;
+        osMessageQueueId_t *servo_q;
+        osMessageQueueId_t *moter_q;
         uint8_t rx_buf[RX_BUF_SIZE];
         uint8_t tmp[RX_BUF_SIZE];
         uint16_t rx_old_pos;
         IDataProcessor *processor;
+        uint8_t receive_flag;
 
-        uint16_t uart_dma_read(uint16_t *);
+        uint16_t uart_dma_read(void *);
     public:
         void Init(void *argument) override;
         void GetFromRx(void *arguement) override;
