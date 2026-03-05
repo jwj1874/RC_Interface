@@ -96,15 +96,27 @@ uint16_t BleRx::uart_dma_read(void *argument){
     return Packet_len;
 }
 
+// 컨트롤러와 rc카에 각 디바이스를 구분할 수 있는 표시 해야함
 void BleRx::GetFromRx(void *argument){
     osMessageQueueGet(*qhandle, &receive_flag, NULL, osWaitForever);
     if (uart_dma_read()){
         Data *data = processor.Decoding(tmp);
+    #if isRCCar
         if (data->mode_data == driving){
             osMessageQueuePut(*moter_q, data, 0, 10);
         }
-        else{
+        else if(data->mode_data == arm){
             osMessageQueuePut(*servo_q, data, 0, 10);
         }
+    #else
+        if (data->mode_data == ack_driving){
+            //HAL_GPIO_WritePin(~~);
+        }
+        else if (data->mode_data == ack_arm){
+            //HAL_GPIO_WritePin(~~);
+        }
+        else
+    #endif
+        
     }
 }

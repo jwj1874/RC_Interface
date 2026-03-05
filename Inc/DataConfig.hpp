@@ -13,6 +13,8 @@ extern "C"{
 
 #define driving 0xFF
 #define arm 0x00
+#define ack_driving 0xA5
+#define ack_arm 0x5A
 
 typedef struct{
     uint8_t mode_data;
@@ -32,3 +34,9 @@ typedef struct{
 }Init_type;
 
 #endif
+
+// 필요한 MessageQueue : 
+// 1. Controller의 Rx용 Message Queue
+// 2. RC의 Rx용 MessageQueue
+// 3. RC의 Servo용 MessageQueue
+// 4. RC의 Moter용 MessageQueue 
