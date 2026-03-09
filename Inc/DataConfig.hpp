@@ -33,6 +33,18 @@ typedef struct{
     void *moter_q;
 }Init_type;
 
+typedef struct{
+    uint32_t servo_top;
+    uint32_t servo_mid;
+    uint32_t servo_bot;
+    uint8_t gripper;
+}Servo_type;
+
+typedef struct{
+    uint8_t moter_x;
+    uint8_t moter_y;
+}Moter_type;
+
 #endif
 
 // 필요한 MessageQueue : 
